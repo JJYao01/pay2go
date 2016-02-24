@@ -3,5 +3,5 @@ from period import views
 
 
 urlpatterns = [
-    url(r'^$', views.main, name='period'),
+    url(r'^$', views.main, name='main'),
 ]   

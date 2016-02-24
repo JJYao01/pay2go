@@ -6,4 +6,28 @@
     <p {% if message.tags %} class={{message.tags}} {% endif %}>{{message}}</p>
   {% endfor %}
 {% endif %}
+{% now "U" %}
+
+<form  method=post action="https://capi.pay2go.com/API/PeriodAPI">
+<input type=hidden name="MerchantID" value="11573000" >
+<input type=hidden name="RespondType" value="String" >
+<input type=hidden name="MerchantOrderNo" value="120160303" >
+<input type=hidden name="PeriodAmt" value="1000" >
+<input type=hidden name="PeriodType" value="M" >
+<input type=hidden name="TimeStamp" value="{% now "U" %}" >
+<input type=hidden name="CheckValue" value="String" >
+<? php
+$CheckValue = array(
+"MerchantID"=>＂商店代號＂,
+ "MerchantOrderNo"=>＂委託單號＂,
+ "PeriodAmt"=>＂委託金額＂,
+ "PeriodType"=>＂週期＂,
+ "TimeStamp"=> time(),
+);
+$CheckValue = http_build_query($CheckValue);
+$CheckValue = "HashKey=$key&$CheckValue&HashIV=$iv";
+$CheckValue = strtoupper(hash("sha256", $CheckValue));
+?>
+<input type=submit  value="送出">
+</form>
 {% endblock %}
