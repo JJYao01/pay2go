@@ -1,0 +1,9 @@
+{% extends "period/base.html" %}
+{% block heading %}定期定額付款測試{% endblock %}
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+    <p {% if message.tags %} class={{message.tags}} {% endif %}>{{message}}</p>
+  {% endfor %}
+{% endif %}
+{% endblock %}
