@@ -1,5 +1,5 @@
-{% extends "period/base.html" %}
-{% block heading %}定期定額付款測試{% endblock %}
+{% extends "mpg/base.html" %}
+{% block heading %}MPG付款測試{% endblock %}
 
 {% block content %}
 {% if messages %}
@@ -9,20 +9,17 @@
 {% endif %}
 {% now "U" %}
 
-<form id="pay2go" method=post action="https://capi.pay2go.com/API/PeriodAPI">
-<input  name="MerchantID" value="11573000" >
+<form id="pay2go" method=post action="https://capi.pay2go.com/MPG/mpg_gateway">
+<input  name="MerchantID" value="123456" >
 <input  name="RespondType" value="String" >
 <input id="CheckValue" name="CheckValue" value="" >
 <input id="TimeStamp" name="TimeStamp" value="" >
 <input  name="Version" value="1.1" >
 <input  name="MerchantOrderNo" value="20140901001" >
-<input  name="ProdDesc" value="Test Prod" >
-<input  name="PeriodAmt" value="1000" >
-<input  name="PeriodAmtMode" value="Period" >
-<input  name="PeriodType" value="M" >
-<input  name="PeriodPoint" value="01" >
-<input  name="PeriodStartType" value="2" >
-<input  name="PeriodTimes" value="2" >
+<input  name="Amt" value="200" >
+<input  name="ItemDesc" value="Test Prod" >
+<input  name="Email" value="s10214607@gm.cyut.edu.tw" >
+<input  name="LoginType" value="0" >
 <input  name="ReturnURL" value="127.0.0.1:8000/" >
 
 
@@ -36,7 +33,7 @@
 $(document).ready(function() {
 
   $(document).on('click', '#submit1', function(e) {
-	    var result = $('#pay2go').find("input[name='MerchantID'],input[name='MerchantOrderNo'],input[name='PeriodAmt'],input[name='PeriodType']");    
+	    var result = $('#pay2go').find("input[name='Amt'],input[name='MerchantID'],input[name='MerchantOrderNo']");    
 	    result = result.sort(comparer('name'));
 	    
 	    var checkValue = '';
@@ -47,7 +44,7 @@ $(document).ready(function() {
 	      }
 	    } 
 	    
-    $.post("{% url 'period:checkValue' %}", {'checkValue': checkValue,csrfmiddlewaretoken:'{{csrf_token}}'}, function(data) {
+    $.post("{% url 'mpg:checkValue' %}", {'checkValue': checkValue,csrfmiddlewaretoken:'{{csrf_token}}'}, function(data) {
         $('#CheckValue').attr('value', data);        
         $('#pay2go').submit();
         

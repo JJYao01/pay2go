@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('period.urls')),
     url(r'^period/', include('period.urls', namespace='period')),
+    url(r'^mpg/', include('mpg.urls', namespace='mpg')),
 ]
