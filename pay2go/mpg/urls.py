@@ -1,10 +1,10 @@
 from django.conf.urls import url
-from period import views
+from mpg import views
 
 
 urlpatterns = [
     url(r'^checkValue/$', views.checkValue, name='checkValue'),
-    url(r'^period/$', views.main, name='main'),
+    url(r'^mpg/$', views.main, name='mpg'),
     url(r'^$', views.main, name='main'),
     
 ]   
